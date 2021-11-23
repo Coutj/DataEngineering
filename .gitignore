@@ -1,0 +1,6 @@
+env
+*.json
+nifi*
+csv_trash
+*CSV
+*csv
