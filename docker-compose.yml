@@ -51,58 +51,10 @@ services:
     networks:
       - dataeng      
 
-  airflow-scheduler:
-    # TODO: to be reverted to use proper registry/distro on T39132
-    # image: docker.io/bitnami/airflow-scheduler:2
-    image: docker.io/bitnami/airflow-scheduler:2
-    environment:
-      - AIRFLOW_DATABASE_NAME=dataengineering
-      - AIRFLOW_DATABASE_USERNAME=admin
-      - AIRFLOW_DATABASE_PASSWORD=admin
-      - AIRFLOW_EXECUTOR=CeleryExecutor
-      - AIRFLOW_WEBSERVER_HOST=airflow
-    volumes:
-      - airflow_scheduler_data:/bitnami
-    networks:
-      - dataeng
-  airflow-worker:
-    # TODO: to be reverted to use proper registry/distro on T39132
-    # image: docker.io/bitnami/airflow-worker:2
-    image: docker.io/bitnami/airflow-worker:2
-    environment:
-      - AIRFLOW_DATABASE_NAME=dataengineering
-      - AIRFLOW_DATABASE_USERNAME=admin
-      - AIRFLOW_DATABASE_PASSWORD=admin
-      - AIRFLOW_EXECUTOR=CeleryExecutor
-      - AIRFLOW_WEBSERVER_HOST=airflow
-    volumes:
-      - airflow_worker_data:/bitnami
-    networks:
-      - dataeng
-  airflow:
-    image: docker.io/bitnami/airflow:2
-    environment:
-      - AIRFLOW_DATABASE_NAME=dataengineering
-      - AIRFLOW_DATABASE_USERNAME=admin
-      - AIRFLOW_DATABASE_PASSWORD=admin
-      - AIRFLOW_EXECUTOR=CeleryExecutor
-    ports:
-      - '8080:8080'
-    volumes:
-      - airflow_data:/bitnami
-    networks:
-      - dataeng
-
 volumes:
   data01:
     driver: local
   data02:
-    driver: local
-  airflow_scheduler_data:
-    driver: local
-  airflow_worker_data:
-    driver: local
-  airflow_data:
     driver: local
 
 networks:
